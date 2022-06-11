@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"shop/model"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,8 +24,8 @@ func (t LoginController) Test(c *gin.Context) {
 func (u LoginController) Login(c *gin.Context) {
 	u.Base.MakeContext(c) //设置上下文
 	c.ShouldBindJSON(&u)
-	username := u.Username
-	pass := u.Password
+	username := strings.Trim(" ", TrimHtml(u.Username))
+	pass := strings.Trim(" ", TrimHtml(u.Password))
 	if username == "" || pass == "" {
 		u.Base.AjaxError("用户密码不能为空")
 		return

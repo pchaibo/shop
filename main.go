@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	//fmt.Println("ok")
 	Start()
 }
 

@@ -2,7 +2,6 @@ package admin
 
 import (
 	"fmt"
-	"net/http"
 	"shop/model"
 	"strconv"
 	"time"
@@ -11,9 +10,62 @@ import (
 )
 
 type UserController struct {
+	Base
+}
+
+func (u UserController) Useradd(c *gin.Context) {
+
+	user := new(model.User)
+	jsonstr := make(map[string]interface{})
+	c.BindJSON(&jsonstr)
+	fmt.Println(jsonstr)
+
+	id := jsonstr["id"].(float64)
+	uid := int64(id)
+
+	user.Mobile = jsonstr["mobile"].(string)
+	user.Username = jsonstr["username"].(string)
+	user.Status = int32(jsonstr["status"].(float64))
+
+	if len(user.Mobile) != 11 {
+		u.Base.AjaxError("电话号码长度不对!")
+		return
+	}
+
+	if jsonstr["password"] != nil {
+		password := jsonstr["password"].(string)
+		user.Password = password
+
+	}
+	//更改
+	if uid > 0 {
+		user.Id = uid
+		res := user.Usserupate()
+		fmt.Println(res)
+		if res > 0 {
+			u.AjaxRun("更新成功!")
+			return
+		} else {
+			u.AjaxError("更新失败")
+			return
+		}
+
+		//添加
+	} else {
+		res := user.Useradd()
+		if res > 0 {
+			u.AjaxRun("添加成功!")
+			return
+		} else {
+			u.AjaxRun("添加失败!")
+			return
+		}
+	}
+
 }
 
 func (u UserController) Userlist(c *gin.Context) {
+	u.Base.MakeContext(c)
 	data, _ := model.Userlist()
 	arr := make([](map[string]interface{}), len(data))
 	for k, v := range data {
@@ -33,27 +85,24 @@ func (u UserController) Userlist(c *gin.Context) {
 	resarr["total"] = len(data)
 	resarr["items"] = arr
 
-	out := AjaxMsg(MSG_OK, "ok", resarr)
-	c.JSON(http.StatusOK, out)
+	u.Base.AjaxRun(resarr)
 }
 
 func (u UserController) Del(c *gin.Context) {
+	u.Base.MakeContext(c)
 	id := c.Query("id")
 	uid, err := strconv.ParseInt(id, 10, 64)
 	if err != nil {
-		out := AjaxMsg(MSG_ERR, "提交数据不对!", "")
-		c.JSON(http.StatusOK, out)
+		u.Base.AjaxError("提交数据不对")
 		return
 	}
 	res := model.Userdel(uid)
 	fmt.Println(res)
 	if res > 0 {
-		out := AjaxMsg(MSG_OK, "删除成功!", id)
-		c.JSON(http.StatusOK, out)
+		u.Base.AjaxRun("删除成功")
 		return
 	} else {
-		out := AjaxMsg(MSG_ERR, "删除失败!", "")
-		c.JSON(http.StatusOK, out)
+		u.Base.AjaxError("删除失败")
 		return
 	}
 

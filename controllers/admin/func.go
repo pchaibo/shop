@@ -12,6 +12,8 @@ import (
 	"gopkg.in/ini.v1"
 )
 
+//token
+var jwtkey = []byte("55youtao.com") //设置key
 //返回code
 const (
 	MSG_OK  = 2000
@@ -26,23 +28,6 @@ func Getserverip() string {
 	http := conf.Section("server").Key("http").String()
 
 	return http
-}
-
-//返回数据
-func AjaxMsg(code int, message string, data interface{}) map[string]interface{} {
-	arr := make(map[string]interface{})
-	if code != MSG_OK {
-		arr["code"] = code
-		arr["message"] = message
-		arr["data"] = data
-		return arr
-
-	}
-
-	arr["code"] = code
-	arr["message"] = message
-	arr["data"] = data
-	return arr
 }
 
 func Md5(buf []byte) string {
@@ -67,21 +52,21 @@ func Password(len int, pwdO string) (pwd string, salt string) {
 /*
 HTML 过滤
 */
-func trimHtml(src string) string {
+func TrimHtml(src string) string {
 	//将HTML标签全转换成小写
-	re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
+	re, _ := regexp.Compile(`\\<[\\S\\s]+?\\>`)
 	src = re.ReplaceAllStringFunc(src, strings.ToLower)
 	//去除STYLE
-	re, _ = regexp.Compile("\\<style[\\S\\s]+?\\</style\\>")
+	re, _ = regexp.Compile(`\\<style[\\S\\s]+?\\</style\\>`)
 	src = re.ReplaceAllString(src, "")
 	//去除SCRIPT
-	re, _ = regexp.Compile("\\<script[\\S\\s]+?\\</script\\>")
+	re, _ = regexp.Compile(`\\<script[\\S\\s]+?\\</script\\>`)
 	src = re.ReplaceAllString(src, "")
 	//去除所有尖括号内的HTML代码，并换成换行符
-	re, _ = regexp.Compile("\\<[\\S\\s]+?\\>")
+	re, _ = regexp.Compile(`\\<[\\S\\s]+?\\>`)
 	src = re.ReplaceAllString(src, "\n")
 	//去除连续的换行符
-	re, _ = regexp.Compile("\\s{2,}")
+	re, _ = regexp.Compile(`\\s{2,}`)
 	src = re.ReplaceAllString(src, "\n")
 	return strings.TrimSpace(src)
 }
@@ -96,9 +81,6 @@ func GetRandomString(lens int) string {
 	}
 	return string(result)
 }
-
-//token
-var jwtkey = []byte("55youtao.com") //设置key
 
 type Claims struct {
 	UserId   int64

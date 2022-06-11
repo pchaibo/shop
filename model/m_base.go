@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	//"time"
 
 	"gopkg.in/ini.v1"
 	"gorm.io/driver/mysql"
@@ -9,25 +10,8 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-type User struct {
-	Id         int64  `json:"id"`
-	Username   string `json:"username"`
-	Password   string `json:"-"`
-	Salt       string `json:"-"`
-	Createtime int64  `json:"createtime,time.Time";gorm:"autoCreateTime"`
-	Jointime   int64  `json:"jointime";gorm:"autoCreateTime"`
-
-	Updatetime int64   `json:"updatetime,time.Time"`
-	Mobile     int64   `json:"mobile"`
-	Token      string  `json:"token"`
-	Money      float64 `json:"money"`
-	Status     int32   `json:"status"`
-}
-
-var Db *gorm.DB
-
 func init() {
-	//取
+	//取配置文件
 	conf, err := ini.Load("./conf/app.conf")
 	if err != nil {
 		fmt.Print(err)
@@ -53,12 +37,29 @@ func init() {
 
 }
 
-func Useradd(name string) int64 {
-	var u User
-	u.Username = name
+type User struct {
+	Id         int64  `json:"id"`
+	Username   string `json:"username"`
+	Password   string `json:"-"`
+	Salt       string `json:"-"`
+	Createtime int64  `json:"createtime" gorm:"autoCreateTime"`
+	Jointime   int64  `json:"jointime" gorm:"autoUpdateTime"`
 
+	Updatetime int64   `json:"updatetime" gorm:"autoUpdateTime"`
+	Mobile     string  `json:"mobile"`
+	Token      string  `json:"token"`
+	Money      float64 `json:"money"`
+	Status     int32   `json:"status"`
+}
+
+var Db *gorm.DB
+
+func (u User) Useradd() int64 {
 	res := Db.Create(&u)
-	//fmt.Println(res.RowsAffected)
+	return res.RowsAffected
+}
+func (u User) Usserupate() int64 {
+	res := Db.Model(&u).Updates(u)
 	return res.RowsAffected
 }
 
@@ -90,7 +91,7 @@ func Userdel(id int64) int64 {
 func Userstop(id int64) int64 {
 	var u User
 
-	res := Db.Model(&u).Where("id", id).Update("status", 0)
+	res := Db.Model(&u).Where("id", id).Update("status", 2)
 
 	return res.RowsAffected
 }

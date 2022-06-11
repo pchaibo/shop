@@ -24,8 +24,8 @@ func (t LoginController) Test(c *gin.Context) {
 func (u LoginController) Login(c *gin.Context) {
 	u.Base.MakeContext(c) //设置上下文
 	c.ShouldBindJSON(&u)
-	username := strings.Trim(" ", TrimHtml(u.Username))
-	pass := strings.Trim(" ", TrimHtml(u.Password))
+	username := strings.TrimSpace(TrimHtml(u.Username))
+	pass := strings.TrimSpace(TrimHtml(u.Password))
 	if username == "" || pass == "" {
 		u.Base.AjaxError("用户密码不能为空")
 		return

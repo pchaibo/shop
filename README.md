@@ -17,9 +17,7 @@ JWT 认证
 后台地址:
 
 git clone https://github.com/pchaibo/shop.git
-```
 
-```bash
 # 后台显示
 
 git clone https://github.com/pchaibo/admin.git

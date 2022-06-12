@@ -25,5 +25,8 @@ git clone https://github.com/pchaibo/shop.git
 git clone https://github.com/pchaibo/admin.git
 ## 配置文件
 conf/app.conf
+
+导入数据库文件 
+gin.sql
 执行
 go run main.go

@@ -1,7 +1,6 @@
 package routers
 
 import (
-	"fmt"
 	"shop/controllers/admin"
 
 	"github.com/gin-gonic/gin"
@@ -27,10 +26,10 @@ func admingroup() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		url := c.Request.URL
 		urlstr := url.String()
-		fmt.Println(urlstr)
+		//fmt.Println(urlstr)
 		if urlstr != "/admin/login" && urlstr != "/admin/info" {
 			token := c.GetHeader("X-Token")
-			fmt.Println(token)
+			//fmt.Println(token)
 			if token == "" {
 				c.AbortWithStatus(200)
 			}

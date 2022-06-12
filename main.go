@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os/exec"
 	"shop/controllers/common"
 	"shop/routers"
 
@@ -10,6 +11,8 @@ import (
 
 func main() {
 	//fmt.Println("ok")
+	res, _ := exec.Command("go", "version").Output()
+	fmt.Println(string(res))
 	Start()
 }
 
@@ -25,7 +28,7 @@ func Start() {
 }
 
 //测试
-func commtest() {
+func Commtest() {
 	common.Getcpu()
 	//common.Ffm()
 	//common.PostEmail()

@@ -14,7 +14,7 @@ type UserController struct {
 }
 
 func (u UserController) Useradd(c *gin.Context) {
-
+	u.Base.MakeContext(c)
 	user := new(model.User)
 	jsonstr := make(map[string]interface{})
 	c.BindJSON(&jsonstr)

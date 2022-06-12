@@ -11,9 +11,9 @@ type Base struct {
 }
 
 //设置上下文
-func (b *Base) MakeContext(c *gin.Context) *Base {
+func (b *Base) MakeContext(c *gin.Context) {
 	b.Context = c
-	return b
+
 }
 
 func (b Base) AjaxRun(data interface{}) {

@@ -22,7 +22,7 @@ func (t LoginController) Test(c *gin.Context) {
 
 //登录
 func (u LoginController) Login(c *gin.Context) {
-	u.Base.MakeContext(c) //设置上下文
+	u.MakeContext(c) //设置上下文
 	c.ShouldBindJSON(&u)
 	username := strings.TrimSpace(TrimHtml(u.Username))
 	pass := strings.TrimSpace(TrimHtml(u.Password))

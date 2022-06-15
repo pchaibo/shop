@@ -16,7 +16,7 @@ func (b *Base) MakeContext(c *gin.Context) {
 
 }
 
-func (b Base) AjaxRun(data interface{}) {
+func (b *Base) AjaxRun(data interface{}) {
 
 	arr := make(map[string]interface{})
 	arr["code"] = MSG_OK
@@ -26,7 +26,7 @@ func (b Base) AjaxRun(data interface{}) {
 
 }
 
-func (b Base) AjaxError(message string) {
+func (b *Base) AjaxError(message string) {
 	arr := make(map[string]interface{})
 	arr["code"] = MSG_ERR
 	arr["message"] = message

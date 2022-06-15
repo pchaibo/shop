@@ -14,7 +14,7 @@ type UserController struct {
 }
 
 func (u UserController) Useradd(c *gin.Context) {
-	u.Base.MakeContext(c)
+	u.MakeContext(c)
 	user := new(model.User)
 	jsonstr := make(map[string]interface{})
 	c.BindJSON(&jsonstr)
@@ -28,7 +28,7 @@ func (u UserController) Useradd(c *gin.Context) {
 	user.Status = int32(jsonstr["status"].(float64))
 
 	if len(user.Mobile) != 11 {
-		u.Base.AjaxError("电话号码长度不对!")
+		u.AjaxError("电话号码长度不对!")
 		return
 	}
 
@@ -65,7 +65,7 @@ func (u UserController) Useradd(c *gin.Context) {
 }
 
 func (u UserController) Userlist(c *gin.Context) {
-	u.Base.MakeContext(c)
+	u.MakeContext(c)
 	data, _ := model.Userlist()
 	arr := make([](map[string]interface{}), len(data))
 	for k, v := range data {
@@ -85,24 +85,24 @@ func (u UserController) Userlist(c *gin.Context) {
 	resarr["total"] = len(data)
 	resarr["items"] = arr
 
-	u.Base.AjaxRun(resarr)
+	u.AjaxRun(resarr)
 }
 
 func (u UserController) Del(c *gin.Context) {
-	u.Base.MakeContext(c)
+	u.MakeContext(c)
 	id := c.Query("id")
 	uid, err := strconv.ParseInt(id, 10, 64)
 	if err != nil {
-		u.Base.AjaxError("提交数据不对")
+		u.AjaxError("提交数据不对")
 		return
 	}
 	res := model.Userdel(uid)
 	fmt.Println(res)
 	if res > 0 {
-		u.Base.AjaxRun("删除成功")
+		u.AjaxRun("删除成功")
 		return
 	} else {
-		u.Base.AjaxError("删除失败")
+		u.AjaxError("删除失败")
 		return
 	}
 

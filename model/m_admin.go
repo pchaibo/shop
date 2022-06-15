@@ -2,7 +2,6 @@ package model
 
 import (
 	"fmt"
-	//"time"
 )
 
 type Admin struct {
@@ -18,18 +17,18 @@ type Admin struct {
 	Updatetime int64   `json:"updatetime" gorm:"autoUpdateTime"`
 }
 
-func (u Admin) Useradd() int64 {
+func (u Admin) Add() int64 {
 
 	res := Db.Create(&u)
 	return res.RowsAffected
 }
-func (u Admin) Usserupate() int64 {
+func (u Admin) Upate() int64 {
 	res := Db.Model(&u).Updates(u)
 	return res.RowsAffected
 }
 
-func Admingetusername(username string) (user Admin, err error) {
-	var u Admin
+func (u Admin) Admingetusername(username string) (user Admin, err error) {
+
 	u.Username = username
 	res := Db.Where(u).First(&user)
 
@@ -37,15 +36,13 @@ func Admingetusername(username string) (user Admin, err error) {
 	return user, res.Error
 }
 
-func Adminlist() (user []Admin, err error) {
-	var u []Admin
-	res := Db.Limit(10).Offset(0).Find(&u)
-	return u, res.Error
+func (u Admin) List() (arr []Admin, err error) {
+	res := Db.Limit(10).Offset(0).Find(&arr)
+	return arr, res.Error
 }
 
 //删除
-func Admindel(id int64) int64 {
-	var u Admin
+func (u Admin) Del(id int64) int64 {
 	u.Id = id
 	res := Db.Delete(&u)
 
@@ -53,9 +50,7 @@ func Admindel(id int64) int64 {
 }
 
 //停用
-func Adminstop(id int64) int64 {
-	var u Admin
-
+func (u Admin) Adminstop(id int64) int64 {
 	res := Db.Model(&u).Where("id", id).Update("status", 0)
 
 	return res.RowsAffected

@@ -30,6 +30,4 @@ func Start() {
 //测试
 func Commtest() {
 	common.Getcpu()
-	//common.Ffm()
-	//common.PostEmail()
 }

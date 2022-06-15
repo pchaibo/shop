@@ -34,7 +34,7 @@ func (u AdminController) Useradd(c *gin.Context) {
 
 	if jsonstr["password"] != nil {
 		password := jsonstr["password"].(string)
-		user.Password = password
+		user.Password = Md5([]byte(password))
 
 	}
 	//更改

@@ -17,6 +17,8 @@ type LoginController struct {
 
 func (t LoginController) Test(c *gin.Context) {
 	es, _ := os.Getwd()
+	t.MakeContext(c)
+	t.AjaxRun("test ok")
 	fmt.Println(es)
 }
 

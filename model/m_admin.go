@@ -6,18 +6,16 @@ import (
 )
 
 type Admin struct {
-	Id         int64  `json:"id"`
-	Username   string `json:"username"`
-	Password   string `json:"-"`
-	Salt       string `json:"-"`
-	Createtime int64  `json:"createtime" gorm:"autoCreateTime"`
-	Jointime   int64  `json:"jointime" gorm:"autoUpdateTime"`
-
-	Updatetime int64   `json:"updatetime" gorm:"autoUpdateTime"`
+	Id         int64   `json:"id"`
+	Username   string  `json:"username"`
+	Password   string  `json:"-"`
+	Salt       string  `json:"-"`
 	Mobile     string  `json:"mobile"`
 	Token      string  `json:"token"`
 	Money      float64 `json:"money"`
 	Status     int32   `json:"status"`
+	Createtime int64   `json:"createtime" gorm:"autoCreateTime"`
+	Updatetime int64   `json:"updatetime" gorm:"autoUpdateTime"`
 }
 
 func (u Admin) Useradd() int64 {

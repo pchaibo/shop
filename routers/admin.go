@@ -7,6 +7,7 @@ import (
 )
 
 func Roueradmin(router *gin.Engine) *gin.Engine {
+	//admins := router.Group("/admin")
 	admins := router.Group("/admin", admingroup())
 	{
 		admins.POST("/login", admin.LoginController{}.Login)
@@ -29,12 +30,16 @@ func admingroup() gin.HandlerFunc {
 		if urlstr != "/admin/login" && urlstr != "/admin/info" {
 			token := c.GetHeader("X-Token")
 			if token == "" {
+				c.String(200, "token not null")
 				c.AbortWithStatus(200)
+				return
 			}
 			//过滤
 			_, _, err := admin.ParseToken(token)
 			if err != nil {
+				c.String(200, "token is error")
 				c.AbortWithStatus(200)
+				return
 			}
 
 		}

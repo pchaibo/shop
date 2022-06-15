@@ -30,6 +30,12 @@ conf/app.conf
 
 gin.sql
 
-执行
+安装好golang环境执行
 
 go run main.go
+
+编译文件
+
+cd shop
+
+go build main.go

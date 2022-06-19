@@ -57,7 +57,7 @@ func (u AdminController) Useradd(c *gin.Context) {
 			u.AjaxRun("添加成功!")
 			return
 		} else {
-			u.AjaxRun("添加失败!")
+			u.AjaxError("添加失败!")
 			return
 		}
 	}

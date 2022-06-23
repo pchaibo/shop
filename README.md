@@ -13,14 +13,13 @@
 基于 GIN WEB API 框架，提供了丰富的中间件支持（用户认证、跨域、访问日志、追踪ID等）
 
 JWT 认证
+后台显示vue 代码下载
+
+git clone https://github.com/pchaibo/admin.git
 
 后台地址:
 
 git clone https://github.com/pchaibo/shop.git
-
-后台显示
-
-git clone https://github.com/pchaibo/admin.git
 
 配置文件
 

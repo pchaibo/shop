@@ -36,7 +36,7 @@ func (u Admin) Admingetusername(username string) (user Admin, err error) {
 	return user, res.Error
 }
 
-func (u Admin) List() (arr []Admin, err error) {
+func (u Admin) Userlist() (arr []Admin, err error) {
 	res := Db.Limit(10).Offset(0).Find(&arr)
 	return arr, res.Error
 }
@@ -53,5 +53,9 @@ func (u Admin) Del(id int64) int64 {
 func (u Admin) Adminstop(id int64) int64 {
 	res := Db.Model(&u).Where("id", id).Update("status", 0)
 
+	return res.RowsAffected
+}
+func (u Admin) Userupdate() int64 {
+	res := Db.Model(&u).Updates(u)
 	return res.RowsAffected
 }

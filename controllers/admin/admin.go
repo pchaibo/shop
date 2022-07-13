@@ -15,7 +15,7 @@ type AdminController struct {
 
 func (u AdminController) Useradd(c *gin.Context) {
 	u.MakeContext(c)
-	user := new(model.User)
+	user := new(model.Admin)
 	jsonstr := make(map[string]interface{})
 	c.BindJSON(&jsonstr)
 	fmt.Println(jsonstr)
@@ -40,7 +40,7 @@ func (u AdminController) Useradd(c *gin.Context) {
 	//更改
 	if uid > 0 {
 		user.Id = uid
-		res := user.Usserupate()
+		res := user.Userupdate()
 		fmt.Println(res)
 		if res > 0 {
 			u.AjaxRun("更新成功!")
@@ -52,7 +52,7 @@ func (u AdminController) Useradd(c *gin.Context) {
 
 		//添加
 	} else {
-		res := user.Useradd()
+		res := user.Add()
 		if res > 0 {
 			u.AjaxRun("添加成功!")
 			return

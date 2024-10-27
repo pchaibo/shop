@@ -24,10 +24,8 @@ go run main.go Trc20Block.go
 http://127.0.0.1:805/ui/
 
 ## 编译文件
-
 cd shop
 go build main.go Trc20Block.go
-##############
 ## 前端使用vue开发
 */web
 ## 开发

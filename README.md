@@ -8,24 +8,29 @@
 前端vue vue-element-admin
 
 ## 后端
-遵循 RESTful API 设计规范，只需要配置文件中，修改数据库连接
-基于 GIN WEB API 框架，提供了丰富的中间件支持（用户认证、跨域、访问日志、追踪ID等）
-JWT 认证
-下载代码:
+* 遵循 RESTful API 设计规范，只需要配置文件中，修改数据库连接
+* 基于 GIN WEB API 框架，提供了丰富的中间件支持（用户认证、跨域、访问日志、追踪ID等）
+* JWT 认证
+* 下载代码:
+```bash
 git clone https://github.com/pchaibo/shop.git
-配置文件
+```
+## 配置文件
 conf/app.conf
 导入数据库文件
 gin.sql
 安装好golang环境执行
+```bash
 go run main.go Trc20Block.go
-
-浏览器访问：
+```
+## 浏览器访问：
 http://127.0.0.1:805/ui/
 
 ## 编译文件
+```bash
 cd shop
 go build main.go Trc20Block.go
+```
 ## 前端使用vue开发
 */web
 ## 开发

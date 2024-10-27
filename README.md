@@ -5,9 +5,7 @@
 </p>
 
 ## 使用golang语言基于Gin + gorm +mysql 的前后端分离权限管理系统
-前端vue vue-element-admin
 
-## 后端
 * 遵循 RESTful API 设计规范，只需要配置文件中，修改数据库连接
 * 基于 GIN WEB API 框架，提供了丰富的中间件支持（用户认证、跨域、访问日志、追踪ID等）
 * JWT 认证
@@ -31,7 +29,7 @@ http://127.0.0.1:805/ui/
 cd shop
 go build main.go Trc20Block.go
 ```
-## 前端使用vue开发
+## 前端使用vue-element-admin
 */web
 
 ```bash

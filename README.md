@@ -1,7 +1,7 @@
 <p align="center">
-  <img width="800" src="https://github.com/pchaibo/admin/blob/master/public/imges/top.png">
-  <img width="800" src="https://github.com/pchaibo/admin/blob/master/public/imges/user.png">
-   <img width="800" src="https://github.com/pchaibo/admin/blob/master/public/imges/add.png">
+  <img width="800" src="https://github.com/pchaibo/shop/blob/master/web/public/imges/top.png">
+  <img width="800" src="https://github.com/pchaibo/shop/blob/master/web/public/imges/user.png">
+   <img width="800" src="https://github.com/pchaibo/shop/blob/master/web/public/imges/add.png">
 </p>
 
 ## 使用golang语言基于Gin + gorm +mysql 的前后端分离权限管理系统

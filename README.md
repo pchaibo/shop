@@ -14,10 +14,8 @@
 git clone https://github.com/pchaibo/shop.git
 ```
 ## 配置文件
-conf/app.conf
-导入数据库文件
-gin.sql
-安装好golang环境执行
+* conf/app.conf
+* 导入数据库文件gin.sql
 ```bash
 go run main.go Trc20Block.go
 ```

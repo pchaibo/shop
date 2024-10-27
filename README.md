@@ -33,7 +33,6 @@ go build main.go Trc20Block.go
 ```
 ## 前端使用vue开发
 */web
-## 开发
 
 ```bash
 # 克隆项目
